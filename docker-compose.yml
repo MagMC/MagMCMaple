@@ -1,4 +1,3 @@
-version: '3'
 services:
   maplestory:
     build: .
@@ -24,8 +23,8 @@ services:
     image: mysql:8.4.0
     environment:
       MYSQL_DATABASE: "cosmic"
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_ROOT_PASSWORD: "1234"
+      #MYSQL_ALLOW_EMPTY_PASSWORD: yes
     ports:
       - "3307:3306"
     volumes:
