@@ -195,6 +195,18 @@
 
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>arm64</id>
+            <activation>
+                <os>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <!-- no netty-tcnative dependency here -->
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <!-- Explicitly disable default jar which includes no dependencies -->
