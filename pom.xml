@@ -203,9 +203,12 @@
                     <arch>aarch64</arch>
                 </os>
             </activation>
-            <!-- no netty-tcnative dependency here -->
+            <dependencies>
+                <!-- exclude netty-tcnative or other optional native dependencies -->
+            </dependencies>
         </profile>
     </profiles>
+
 
     <build>
         <plugins>
