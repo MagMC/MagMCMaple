@@ -195,35 +195,9 @@
 
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>arm64</id>
-            <activation>
-                <os>
-                    <arch>aarch64</arch>
-                </os>
-            </activation>
-            <dependencies>
-                <!-- exclude netty-tcnative or other optional native dependencies -->
-            </dependencies>
-        </profile>
-    </profiles>
-
-
     <build>
         <plugins>
             <!-- Explicitly disable default jar which includes no dependencies -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version> <!-- works with Java 17 -->
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                    <release>17</release>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
