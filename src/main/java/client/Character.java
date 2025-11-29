@@ -6263,6 +6263,15 @@ public class Character extends AbstractCharacterObject {
         return spGain;
     }
 
+    private void getNxCredit() {
+        if (YamlConfig.config.server.GET_NX_CREDIT_ON_LEVEL_UP){
+            int cashGain = 100 * level;
+            this.cashshop.gainCash(1, cashGain);
+
+            dropMessage("You have gained " + cashGain + " NX Credits");
+        }
+    }
+
     private void levelUpGainSp() {
         if (GameConstants.getJobBranch(job) == 0) {
             return;
@@ -6402,6 +6411,8 @@ public class Character extends AbstractCharacterObject {
 
             level = maxClassLevel; //To prevent levels past the maximum
         }
+
+        getNxCredit();
 
         levelUpGainSp();
 
