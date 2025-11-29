@@ -4,6 +4,19 @@
 
 set -e  # Exit on any error
 
+echo "Starting MySQL database container..."
+docker rm -f cosmic-db 2>/dev/null || true
+docker run -d \
+  --name cosmic-db \
+  -e MYSQL_DATABASE=cosmic \
+  -e MYSQL_ROOT_PASSWORD=1234 \
+  -p 3306:3306 \
+  -v /media/plex-drive/docker/maplestory_server/database:/var/lib/mysql \
+  mysql:8.4.0
+
+echo "Waiting for MySQL to be ready..."
+sleep 10
+
 echo "Building Docker image..."
 docker build -f DockerfileRpi4 -t cosmic-server .
 
