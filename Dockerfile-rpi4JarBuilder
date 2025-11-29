@@ -1,11 +1,14 @@
-# Use official Maven + JDK 21 image for x86_64 (works on Windows Docker)
+# Use official Maven + JDK 21 image for x86_64
 FROM maven:3.9.6-amazoncorretto-21
 
 WORKDIR /opt/cosmic
 
 # Copy pom and source
-COPY pom.xml ./pom.xml
+COPY pom.xml .
 COPY src ./src
 
-# Build JAR without running tests
+# Build JAR when building the image
 RUN mvn clean package -Dmaven.test.skip
+
+# Default command (does nothing, but container must exit cleanly)
+CMD ["echo", "Build complete"]
