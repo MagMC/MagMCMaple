@@ -4,7 +4,7 @@
 
 set -e  # Exit on any error
 
-echo "Starting MySQL database container..."
+echo "Starting MariaDB database container (MySQL compatible)..."
 docker rm -f cosmic-db 2>/dev/null || true
 docker run -d \
   --name cosmic-db \
@@ -12,7 +12,7 @@ docker run -d \
   -e MYSQL_ROOT_PASSWORD=1234 \
   -p 3306:3306 \
   -v /media/plex-drive/docker/maplestory_server/database:/var/lib/mysql \
-  mysql:8.4.0
+  mariadb:11.4
 
 echo "Waiting for MySQL to be ready..."
 sleep 10
