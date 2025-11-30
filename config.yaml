@@ -197,7 +197,7 @@ server:
 
     #Ip Configuration
     HOST: ${HOST}                       #WAN IPv4 address
-    LANHOST: ${HOST}              #LAN IPv4 address
+    LANHOST: 192.168.1.159              #LAN IPv4 address
     LOCALHOST: 127.0.0.1            #Loopback IPv4 address
     GMSERVER: false
 
