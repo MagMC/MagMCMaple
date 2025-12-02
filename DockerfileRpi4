@@ -1,7 +1,33 @@
-# Use ARM32-compatible Debian base
+#
+# Cosmic JAR creation stage
+#
+FROM debian:bookworm-slim AS jar
+
+# Install Maven and BellSoft JDK 21 for ARM32
+RUN apt-get update && \
+    apt-get install -y wget ca-certificates maven && \
+    wget https://download.bell-sw.com/java/21.0.5+11/bellsoft-jdk21.0.5+11-linux-arm32-vfp-hflt.deb && \
+    apt-get install -y ./bellsoft-jdk21.0.5+11-linux-arm32-vfp-hflt.deb && \
+    rm bellsoft-jdk21.0.5+11-linux-arm32-vfp-hflt.deb && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Build in a separated location which won't have permissions issues
+WORKDIR /opt/cosmic
+
+# Copy pom first for better layer caching
+COPY pom.xml ./pom.xml
+
+# Copy source code and build
+COPY src ./src
+RUN mvn -f ./pom.xml clean package -Dmaven.test.skip -T 1C
+
+#
+# Server creation stage
+#
 FROM debian:bookworm-slim
 
-# Install dependencies and download BellSoft JDK 21 for ARM32
+# Install BellSoft JDK 21 for ARM32 (runtime only)
 RUN apt-get update && \
     apt-get install -y wget ca-certificates && \
     wget https://download.bell-sw.com/java/21.0.5+11/bellsoft-jdk21.0.5+11-linux-arm32-vfp-hflt.deb && \
@@ -11,7 +37,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/server
-COPY Cosmic.jar ./Server.jar
+
+# Copy the JAR from build stage
+COPY --from=jar /opt/cosmic/target/Cosmic.jar ./Server.jar
 COPY scripts ./scripts/
 COPY config.yaml ./
 
