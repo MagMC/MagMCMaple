@@ -2,7 +2,7 @@ package client.command.commands.gm2;
 
 import client.Client;
 import client.command.Command;
-import server.ShopFactory;
+import constants.id.NpcId;
 
 public class EssentialsCommand extends Command {
     {
@@ -11,6 +11,8 @@ public class EssentialsCommand extends Command {
 
     @Override
     public void execute(Client client, String[] params) {
-        ShopFactory.getInstance().getShop(1335).sendShop(client);
+        // Create and open a custom essentials script
+        // You'll need to create a script file called "essentials.js"
+        client.getAbstractPlayerInteraction().openNpc(NpcId.MIU, "essentials");
     }
 }
