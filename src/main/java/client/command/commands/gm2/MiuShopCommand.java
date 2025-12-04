@@ -4,7 +4,7 @@ import client.Client;
 import client.command.Command;
 import server.ShopFactory;
 
-public class MuiShopCommand extends Command {
+public class MiuShopCommand extends Command {
     {
         setDescription("Open the Mui shop");
     }
