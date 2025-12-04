@@ -114,7 +114,19 @@ function action(mode, type, selection) {
     }
 }
 
-// Helper function to format numbers with commas
+// Helper function to format numbers with commas (GraalVM compatible)
 function addCommas(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    var str = num.toString();
+    var result = "";
+    var count = 0;
+
+    for (var i = str.length - 1; i >= 0; i--) {
+        if (count > 0 && count % 3 == 0) {
+            result = "," + result;
+        }
+        result = str.charAt(i) + result;
+        count++;
+    }
+
+    return result;
 }
