@@ -12,6 +12,9 @@
 /out
 *.onetoc2
 
+# config 
+config.yaml
+
 # Eclipse m2e generated files
 # Eclipse Core
 .project
