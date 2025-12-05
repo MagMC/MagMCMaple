@@ -12,6 +12,6 @@ public class MiuShopCommand extends Command {
     @Override
     public void execute(Client client, String[] params) {
         //Should be if have muiShopItem
-        ShopFactory.getInstance().getShop(1336).sendShop(client);
+        ShopFactory.getInstance().getShop(5450000).sendShop(client);
     }
 }
